@@ -1,0 +1,2 @@
+include ':app', ':lwwlibrary'
+rootProject.name='Chaperone'
