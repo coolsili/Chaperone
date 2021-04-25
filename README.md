@@ -10,8 +10,8 @@ allprojects {
         implementation 'com.github.coolsili:Chaperone:1.2.1'
         api 'androidx.lifecycle:lifecycle-extensions:2.2.0'
         //rxJava
-        implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
-        implementation 'io.reactivex.rxjava2:rxjava:2.2.14'
+        implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
+        implementation 'io.reactivex.rxjava3:rxjava:3.0.0'
         //retrofit
         implementation 'com.squareup.retrofit2:retrofit:2.3.0'
         implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
@@ -25,7 +25,12 @@ allprojects {
         dataBinding {
             enabled = true
         }
+        compileOptions {
+                sourceCompatibility 1.8
+                targetCompatibility 1.8
+        }
      }
+
 
 增加请求封装
 1.添加依赖。
