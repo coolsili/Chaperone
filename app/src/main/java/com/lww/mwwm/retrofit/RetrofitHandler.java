@@ -96,4 +96,9 @@ public class RetrofitHandler {
     public ApiService getAPIService() {
         return mObservableAPI;
     }
+
+    public <T> T getAPIService(Class<T> t) throws InstantiationException, IllegalAccessException {
+
+        return t.newInstance();
+    }
 }
