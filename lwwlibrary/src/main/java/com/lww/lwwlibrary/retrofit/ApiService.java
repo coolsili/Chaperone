@@ -1,4 +1,5 @@
 package com.lww.lwwlibrary.retrofit;
+import com.lww.lwwlibrary.entity.BaseEntity;
 import com.lww.lwwlibrary.retrofit.entity.BaseResponseEntity;
 import io.reactivex.Observable;
 import okhttp3.RequestBody;
@@ -14,8 +15,9 @@ public interface ApiService {
     String APP_SERVER_BASE_URL = "";
 
     //登录
-//    @POST("appDisUserLoginController.do?toUserLogin")
-//    Observable<BaseResponseEntity<UserInfo>> login(@Body RequestBody requestBody);
+    @POST("appDisUserLoginController.do?toUserLogin")
+    Observable<BaseResponseEntity<BaseEntity>> login(@Body RequestBody requestBody);
 
-
+    @POST("appDisUserLoginController.do?toUserLogin")
+    Observable<BaseResponseEntity<BaseEntity>> logOut(@Body RequestBody requestBody);
 }

@@ -10,17 +10,15 @@ import android.widget.Toast;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.lww.lwwlibrary.entity.BaseEntity;
+import com.lww.lwwlibrary.retrofit.BaseObserver;
+import com.lww.lwwlibrary.retrofit.ObservableManager;
+import com.lww.lwwlibrary.retrofit.ParamsBuilder;
+import com.lww.lwwlibrary.retrofit.RetrofitHandler;
+import com.lww.lwwlibrary.retrofit.RxTransformerHelper;
+import com.lww.lwwlibrary.retrofit.entity.BaseResponseEntity;
 import com.lww.mwwm.activity.HomeActivity;
 import com.lww.mwwm.entity.UserInfo;
-import com.lww.mwwm.retrofit.BaseObserver;
-import com.lww.mwwm.retrofit.ObservableManager;
-import com.lww.mwwm.retrofit.ParamsBuilder;
-import com.lww.mwwm.retrofit.RetrofitHandler;
-import com.lww.mwwm.retrofit.RxTransformerHelper;
-import com.lww.mwwm.retrofit.entity.BaseResponseEntity;
-
-import io.reactivex.Observable;
-import io.reactivex.Observer;
 
 
 public class LoginViewModel extends ViewModel{
@@ -31,16 +29,15 @@ public class LoginViewModel extends ViewModel{
     public void onLogin(View view){
         //判断限制输入字符是否正确，是否有网
 //        Toast.makeText(BaseApplication.getInstance(),userName+" "+password, Toast.LENGTH_SHORT).show();
-
         RetrofitHandler.getInstance().getAPIService()
                 .login(ObservableManager.getInstance().getRequestBody(ParamsBuilder.getIntance()
                         .addParams("userName",userName.getValue())
                         .addParams("password",password.getValue())
                         .addParams("type","0").get()))
-                .compose(RxTransformerHelper.observableIO2Main())
-                .subscribe(new BaseObserver<UserInfo>() {
+                .compose(RxTransformerHelper.<BaseResponseEntity<BaseEntity>>observableIO2Main())
+                .subscribe(new BaseObserver<BaseEntity>() {
                     @Override
-                    protected void onSuccess(BaseResponseEntity<UserInfo> tBaseEntity) {
+                    protected void onSuccess(BaseResponseEntity<BaseEntity> tBaseEntity) {
                         if(view.getContext() instanceof Activity){
                             view.getContext().startActivity(new Intent(view.getContext(), HomeActivity.class));
                             return;
@@ -62,14 +59,14 @@ public class LoginViewModel extends ViewModel{
         //判断限制输入字符是否正确，是否有网
 //        Toast.makeText(BaseApplication.getInstance(),userName+" "+password, Toast.LENGTH_SHORT).show();
         RetrofitHandler.getInstance().getAPIService()
-                .logOut(UserInfo.class,ObservableManager.getInstance().getRequestBody(ParamsBuilder.getIntance()
+                .logOut(ObservableManager.getInstance().getRequestBody(ParamsBuilder.getIntance()
                         .addParams("userName",userName.getValue())
                         .addParams("password",password.getValue())
                         .addParams("type","0").get()))
-                .compose(RxTransformerHelper.<BaseResponseEntity<UserInfo>>observableIO2Main())
-                .subscribe(new BaseObserver<UserInfo>() {
+                .compose(RxTransformerHelper.<BaseResponseEntity<BaseEntity>>observableIO2Main())
+                .subscribe(new BaseObserver<BaseEntity>() {
                     @Override
-                    protected void onSuccess(BaseResponseEntity<UserInfo> tBaseEntity) {
+                    protected void onSuccess(BaseResponseEntity<BaseEntity> tBaseEntity) {
                         if(view.getContext() instanceof Activity){
                             view.getContext().startActivity(new Intent(view.getContext(), HomeActivity.class));
                             return;
