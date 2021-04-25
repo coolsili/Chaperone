@@ -1,5 +1,4 @@
 # Chaperone
-
 allprojects {
     repositories {
         maven { url 'https://jitpack.io' }
@@ -21,6 +20,7 @@ allprojects {
         implementation 'com.squareup.okhttp3:okhttp:4.0.1'
         implementation 'com.squareup.okhttp3:logging-interceptor:3.8.1'
     }
+
     android{
         dataBinding {
             enabled = true
@@ -28,7 +28,7 @@ allprojects {
      }
 
 增加请求封装
-1.添加依赖
-2.在使用的项目中添加RetrofitHandler和ApiService
-  定义接口和使用类
-3.调用查看app中HomeViewModle.class示例
+1.添加依赖。
+2.在使用的项目中添加RetrofitHandler和ApiService，
+  定义接口和使用类。
+3.调用查看app中HomeViewModle.class示例。
