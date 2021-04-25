@@ -1,5 +1,7 @@
 package com.lww.mwwm.entity;
 
-public class UserInfo {
+import com.lww.mwwm.retrofit.entity.BaseResponseEntity;
+
+public class UserInfo{
     public String userName;
 }

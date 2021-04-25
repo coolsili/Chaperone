@@ -10,24 +10,14 @@ import io.reactivex.schedulers.Schedulers;
  * 调度类
  * lww
  */
-public class RxTransformerHelper {
+public class RxTransformerHelper<D> {
 
     public static <T> ObservableTransformer<T, T> observableIO2Main() {
-        return new ObservableTransformer<T, T>() {
-            @Override
-            public ObservableSource<T> apply(Observable<T> upstream) {
-                return upstream.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
-            }
-        };
+        return upstream -> upstream.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
     public static <T> ObservableTransformer<T, T> observableIO2Thread() {
-        return new ObservableTransformer<T, T>() {
-            @Override
-            public ObservableSource<T> apply(Observable<T> upstream) {
-                return upstream.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
-            }
-        };
+        return upstream -> upstream.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 }
 

@@ -13,11 +13,14 @@ import retrofit2.http.POST;
  * lww
  */
 public interface ApiService {
-    String APP_SERVER_BASE_URL = "https://iomsdev.logimis.com/";
+    String APP_SERVER_BASE_URL = "https://iomstest.logimis.com/";
 
     //登录
     @POST("appDisUserLoginController.do?toUserLogin")
     Observable<BaseResponseEntity<UserInfo>> login(@Body RequestBody requestBody);
 
+    //登录
+    @POST("appDisUserLoginController.do?toUserLogin")
+    <T> Observable<BaseResponseEntity<T>> logOut(Class<T> t,@Body RequestBody requestBody);
 
 }

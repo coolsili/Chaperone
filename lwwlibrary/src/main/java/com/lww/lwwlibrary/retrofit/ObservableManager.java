@@ -1,4 +1,4 @@
-package com.lww.mwwm.retrofit;
+package com.lww.lwwlibrary.retrofit;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -34,7 +34,6 @@ public class ObservableManager {
         }
         String jso = data.substring(0, data.length() - 1);
         MediaType mediaType=MediaType.Companion.parse("application/x-www-form-urlencoded; charset=utf-8");
-
         RequestBody requestBody = RequestBody.Companion.create(jso,mediaType);
         return requestBody;
     }

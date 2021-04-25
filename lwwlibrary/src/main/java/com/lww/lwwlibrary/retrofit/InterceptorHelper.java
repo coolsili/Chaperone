@@ -1,4 +1,4 @@
-package com.lww.mwwm.retrofit;
+package com.lww.lwwlibrary.retrofit;
 
 import android.util.Log;
 
@@ -27,7 +27,7 @@ public class InterceptorHelper {
         return new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
             @Override
             public void log(String message) {
-                if(isLog){
+                 if(isLog){
                     Log.w(TAG, "LogInterceptor---------: " + message);
                 }
             }
@@ -107,9 +107,10 @@ public class InterceptorHelper {
 //                        .addHeader("Accept", "application/json; q=0.5")
 //                        .addHeader("Accept", "application/vnd.github.v3+json")
                         .addHeader("Accept-Encoding", "identity")
+
                         .addHeader("Accept-Encoding", "gzip")
                         .addHeader("Accept", "application/json")
-                        .addHeader("Content-Type", "application/json; charset=utf-8")
+//                        .addHeader("Content-Type", "application/json; charset=utf-8")
                         .method(originalRequest.method(), originalRequest.body())
 //                    .addHeader(Constants.WEB_TOKEN, webi_token)
                         .build();

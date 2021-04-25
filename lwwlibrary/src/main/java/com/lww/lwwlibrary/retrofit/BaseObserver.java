@@ -1,15 +1,16 @@
-package com.lww.mwwm.retrofit;
+package com.lww.lwwlibrary.retrofit;
 
 
 import android.accounts.NetworkErrorException;
 import android.content.Context;
 import android.text.TextUtils;
-import android.util.Log;
 
-import com.lww.mwwm.retrofit.entity.BaseResponseEntity;
+import com.lww.lwwlibrary.retrofit.entity.BaseResponseEntity;
+
 import java.net.ConnectException;
 import java.net.UnknownHostException;
 import java.util.concurrent.TimeoutException;
+
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
@@ -37,7 +38,6 @@ public abstract class BaseObserver<T> implements Observer<BaseResponseEntity<T>>
     public void onNext(BaseResponseEntity<T> tBaseEntity) {
         onRequestEnd();
         String message_common = "Oops, something went wrong. Please try again.";
-        Log.e("TAG","tBaseEntity.getCode =" +tBaseEntity.getCode());
         if (tBaseEntity.getCode()==200) {//成功
             try {
                 onSuccess(tBaseEntity);
@@ -62,7 +62,6 @@ public abstract class BaseObserver<T> implements Observer<BaseResponseEntity<T>>
         onRequestEnd();
         String message_common = "Oops, something went wrong. Please try again.";
         String msg_timeout = "Oops, connection timeout, please try again later";
-        Log.e("TAG.","onError " + e.getMessage());
         try {
             if (e instanceof ConnectException
                     || e instanceof TimeoutException
