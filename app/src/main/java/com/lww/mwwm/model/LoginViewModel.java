@@ -11,6 +11,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.lww.lwwlibrary.entity.BaseEntity;
+import com.lww.lwwlibrary.retrofit.ApiService;
 import com.lww.lwwlibrary.retrofit.BaseObserver;
 import com.lww.lwwlibrary.retrofit.ObservableManager;
 import com.lww.lwwlibrary.retrofit.ParamsBuilder;
@@ -19,6 +20,7 @@ import com.lww.lwwlibrary.retrofit.RxTransformerHelper;
 import com.lww.lwwlibrary.retrofit.entity.BaseResponseEntity;
 import com.lww.mwwm.activity.HomeActivity;
 import com.lww.mwwm.entity.UserInfo;
+import com.lww.mwwm.utils.RetrofitHandlerImp;
 
 
 public class LoginViewModel extends ViewModel{
@@ -29,7 +31,7 @@ public class LoginViewModel extends ViewModel{
     public void onLogin(View view){
         //判断限制输入字符是否正确，是否有网
 //        Toast.makeText(BaseApplication.getInstance(),userName+" "+password, Toast.LENGTH_SHORT).show();
-        RetrofitHandler.getInstance().getAPIService()
+        RetrofitHandlerImp.getInstance().getAPIService()
                 .login(ObservableManager.getInstance().getRequestBody(ParamsBuilder.getIntance()
                         .addParams("userName",userName.getValue())
                         .addParams("password",password.getValue())
@@ -58,7 +60,9 @@ public class LoginViewModel extends ViewModel{
     public void onLogin2(View view){
         //判断限制输入字符是否正确，是否有网
 //        Toast.makeText(BaseApplication.getInstance(),userName+" "+password, Toast.LENGTH_SHORT).show();
-        RetrofitHandler.getInstance().getAPIService()
+        RetrofitHandler<ApiService> retrofitHandler = new RetrofitHandler<>();
+        retrofitHandler.getAPIService()
+//        RetrofitHandlerImp.getInstance().getAPIService()
                 .logOut(ObservableManager.getInstance().getRequestBody(ParamsBuilder.getIntance()
                         .addParams("userName",userName.getValue())
                         .addParams("password",password.getValue())

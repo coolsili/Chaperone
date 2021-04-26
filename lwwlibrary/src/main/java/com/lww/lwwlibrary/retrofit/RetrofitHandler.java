@@ -1,5 +1,9 @@
 package com.lww.lwwlibrary.retrofit;
 
+import android.util.Log;
+
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -11,18 +15,18 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * 日期 2020/04/13 10:07
  * lww
  */
-public class RetrofitHandler {
+public class RetrofitHandler<T> {
 
     private static Retrofit mRetrofit;
-    private static OkHttpClient mOkHttpClient;
+    protected static OkHttpClient mOkHttpClient;
     private static RetrofitHandler mRetrofitHandler;
-    private static ApiService mObservableAPI;
+    protected T t;
 
-    private RetrofitHandler() {
+    public RetrofitHandler() {
         initRetrofit();
     }
 
-    public static synchronized RetrofitHandler getInstance() {
+    public static synchronized <T> RetrofitHandler<T> getInstance(T t) {
         if (mRetrofitHandler == null) {
             synchronized (RetrofitHandler.class) {
                 if (mRetrofitHandler == null) {
@@ -36,17 +40,21 @@ public class RetrofitHandler {
     /**
      * 获取 Retrofit
      */
-    private void initRetrofit() {
+    protected void initRetrofit() {
+        Log.e("TAG","RetrofitHandler.java");
         initOkHttpClient();
-        mRetrofit = new Retrofit.Builder()
-                .baseUrl(ApiService.APP_SERVER_BASE_URL)
-                //JSON转换器,使用Gson来转换
-                .addConverterFactory(GsonConverterFactory.create())
-                //RxJava适配器
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .client(mOkHttpClient)
-                .build();
-        mObservableAPI = mRetrofit.create(ApiService.class);
+//        mRetrofit = new Retrofit.Builder()
+//                .baseUrl(ApiService.APP_SERVER_BASE_URL)
+//                //JSON转换器,使用Gson来转换
+//                .addConverterFactory(GsonConverterFactory.create())
+//                //RxJava适配器
+//                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+//                .client(mOkHttpClient)
+//                .build();
+//        无法获取t的类对象
+//        Class<T> tClass= (Class<T>)((ParameterizedType)t.getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+//        Class<T> tClass;
+//        t = mRetrofit.create();
     }
 
     /**
@@ -93,7 +101,7 @@ public class RetrofitHandler {
      *
      * @return
      */
-    public ApiService getAPIService() {
-        return mObservableAPI;
+    public T getAPIService() {
+        return t;
     }
 }

@@ -19,6 +19,7 @@ import com.lww.mwwm.fragment.NursingManageFragment;
 import com.lww.mwwm.fragment.PatientManageFragment;
 import com.lww.mwwm.fragment.SettingManageFragment;
 import com.lww.mwwm.model.HomeViewModel;
+import com.lww.lwwlibrary.activity.BaseActivity;
 
 import java.util.ArrayList;
 
@@ -35,12 +36,14 @@ public class HomeActivity extends BaseActivity<ActivityHomeBinding,HomeViewModel
     }
 
     @Override
+    protected void afterCreate() {
+        mViewDataBind.setViewModel(vm);
+
+    }
+
+    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        ViewModelProvider viewModelProvider = new ViewModelProvider(this);
-//        HomeViewModel homeViewModel = viewModelProvider.get(HomeViewModel.class);
-//        binding.setViewModel(homeViewModel);
-//        binding.setLifecycleOwner(this);
 
         final PatientManageFragment patientFragment = new PatientManageFragment();
         final NursingManageFragment nursingFragment = new NursingManageFragment();
@@ -96,12 +99,7 @@ public class HomeActivity extends BaseActivity<ActivityHomeBinding,HomeViewModel
 
     }
 
-    @Override
-    protected void afterCreate() {
-//        vm =
-        mViewDataBind.setViewModel(vm);
 
-    }
 
 
 }

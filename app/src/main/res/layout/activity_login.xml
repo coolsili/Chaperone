@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/password"
             android:text="登录"
-            android:onClick="@{() -> viewModel.onLogin(buton1)}"/>
+            android:onClick="@{() -> viewModel.onLogin2(buton1)}"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

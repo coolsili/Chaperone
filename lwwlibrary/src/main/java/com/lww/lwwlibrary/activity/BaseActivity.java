@@ -7,7 +7,12 @@ import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.lifecycle.ViewModel;
 
-
+/**
+ *  2021-04-26
+ *  lww
+ * @param <V>
+ * @param <VM>
+ */
 public abstract class BaseActivity<V extends ViewDataBinding, VM extends ViewModel> extends AppCompatActivity {
     protected V mViewDataBind;
     protected VM vm;

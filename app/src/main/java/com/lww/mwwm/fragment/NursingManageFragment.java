@@ -1,41 +1,26 @@
 package com.lww.mwwm.fragment;
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.lww.lwwlibrary.activity.BaseFragment;
 import com.lww.mwwm.R;
 import com.lww.mwwm.databinding.FragmentNursingBinding;
 import com.lww.mwwm.model.NusingViewModel;
 
-public class NursingManageFragment extends Fragment {
-    private FragmentNursingBinding mBinding;
-    @Nullable
+public class NursingManageFragment extends BaseFragment<FragmentNursingBinding, NusingViewModel> {
+
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-         mBinding = DataBindingUtil.inflate(inflater,
-                R.layout.fragment_nursing,
-                container,
-                false);
-
-        return mBinding.getRoot();
-
+    protected int getLayout() {
+        return R.layout.fragment_nursing;
     }
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        ViewModelProvider viewModelProvider = new ViewModelProvider(this);
-        NusingViewModel viewModel = viewModelProvider.get(NusingViewModel.class);
-        mBinding.setViewModel(viewModel);
-        //数据改变，UI自动会更新
-        mBinding.setLifecycleOwner(this);
 
+    @Override
+    protected void afterCreate() {
+        mViewDataBind.setViewModel(vm);
+    }
+
+    @Override
+    protected NusingViewModel createViewModel() {
+        return new ViewModelProvider(this).get(NusingViewModel.class);
     }
 }

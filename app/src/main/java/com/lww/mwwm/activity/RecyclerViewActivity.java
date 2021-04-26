@@ -7,6 +7,7 @@ import android.os.Bundle;
 import com.lww.mwwm.R;
 import com.lww.mwwm.databinding.ActivityRecyclerViewBinding;
 import com.lww.mwwm.model.RecyclerViewListViewModel;
+import com.lww.lwwlibrary.activity.BaseActivity;
 
 public class RecyclerViewActivity extends BaseActivity<ActivityRecyclerViewBinding,RecyclerViewListViewModel> {
 
