@@ -35,10 +35,8 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends ViewMod
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        VM vm = createViewModel();
-//        mViewDataBind.setViewModel(vm);
-        //数据改变，UI自动会更新
         mViewDataBind.setLifecycleOwner(this);
+        vm = createViewModel();
         afterCreate();
     }
 

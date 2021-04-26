@@ -20,7 +20,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="50dp"
-            android:text="NursingManage"/>
+            android:text="@={viewModel.content}"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:background="#ff0"
+            android:text="点击事件222"
+            android:onClick="@{() -> viewModel.onButtonClick()}"
+            />
     </LinearLayout>
 
 </layout>

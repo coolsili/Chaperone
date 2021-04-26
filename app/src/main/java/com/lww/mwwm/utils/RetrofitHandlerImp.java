@@ -7,6 +7,10 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+/**
+ * 2021-04-26 16:18
+ * lww
+ */
 public class RetrofitHandlerImp extends RetrofitHandler<ApiService> {
     private static RetrofitHandlerImp mRetrofitHandlerImp;
     private RetrofitHandlerImp() {

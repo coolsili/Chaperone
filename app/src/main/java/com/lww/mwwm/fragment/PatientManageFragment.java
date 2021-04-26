@@ -7,7 +7,7 @@ import com.lww.mwwm.R;
 import com.lww.mwwm.databinding.FragmentPatientBinding;
 import com.lww.mwwm.model.PatientViewModel;
 
-public class PatientManageFragment extends BaseFragment<FragmentPatientBinding,PatientViewModel> {
+public class PatientManageFragment extends BaseFragment<FragmentPatientBinding, PatientViewModel> {
 
     @Override
     protected int getLayout() {
@@ -15,12 +15,12 @@ public class PatientManageFragment extends BaseFragment<FragmentPatientBinding,P
     }
 
     @Override
-    protected void afterCreate() {
-        mViewDataBind.setViewModel(vm);
+    protected PatientViewModel createViewModel() {
+        return new ViewModelProvider(this).get(PatientViewModel.class);
     }
 
     @Override
-    protected PatientViewModel createViewModel() {
-        return new ViewModelProvider(this).get(PatientViewModel.class);
+    protected void afterCreate() {
+        mViewDataBind.setViewModel(vm);
     }
 }

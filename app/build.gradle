@@ -54,5 +54,7 @@ dependencies {
     //gson
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation project(path: ':lwwlibrary')
+    //eventbus
+    implementation 'org.greenrobot:eventbus:3.2.0'
 
 }
