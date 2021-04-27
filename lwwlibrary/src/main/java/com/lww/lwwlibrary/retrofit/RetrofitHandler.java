@@ -2,14 +2,9 @@ package com.lww.lwwlibrary.retrofit;
 
 import android.util.Log;
 
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * 日期 2020/04/13 10:07
@@ -17,7 +12,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class RetrofitHandler<T> {
 
-    private static Retrofit mRetrofit;
     protected static OkHttpClient mOkHttpClient;
     private static RetrofitHandler mRetrofitHandler;
     protected T t;
@@ -26,7 +20,7 @@ public class RetrofitHandler<T> {
         initRetrofit();
     }
 
-    public static synchronized <T> RetrofitHandler<T> getInstance(T t) {
+    public static synchronized <T> RetrofitHandler<T> getInstance() {
         if (mRetrofitHandler == null) {
             synchronized (RetrofitHandler.class) {
                 if (mRetrofitHandler == null) {
@@ -41,13 +35,13 @@ public class RetrofitHandler<T> {
      * 获取 Retrofit
      */
     protected void initRetrofit() {
-        Log.e("TAG","RetrofitHandler.java");
+        Log.e("TAG", "RetrofitHandler.java");
         initOkHttpClient();
 //        mRetrofit = new Retrofit.Builder()
 //                .baseUrl(ApiService.APP_SERVER_BASE_URL)
-//                //JSON转换器,使用Gson来转换
+//                //Json转换器，用Gson来转换
 //                .addConverterFactory(GsonConverterFactory.create())
-//                //RxJava适配器
+//                //Rxjava适配器
 //                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
 //                .client(mOkHttpClient)
 //                .build();

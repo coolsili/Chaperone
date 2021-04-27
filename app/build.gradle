@@ -56,5 +56,6 @@ dependencies {
     implementation project(path: ':lwwlibrary')
     //eventbus
     implementation 'org.greenrobot:eventbus:3.2.0'
+    implementation 'androidx.recyclerview:recyclerview:1.2.0'
 
 }

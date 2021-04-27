@@ -11,17 +11,25 @@
             name="viewModel"
             type="RecyclerViewListViewModel" />
     </data>
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context=".activity.RecyclerViewActivity">
+        android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/tv_add"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="40dp"
+            android:text="addItem"
+            android:onClick="@{() -> viewModel.addItem(rv)}"/>
 
-
-
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:items="@{viewModel.data}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
     </LinearLayout>
 
 </layout>

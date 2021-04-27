@@ -24,7 +24,7 @@ public class RecyclerViewActivity extends BaseActivity<ActivityRecyclerViewBindi
 
     @Override
     protected void afterCreate() {
-
+        mViewDataBind.setViewModel(vm);
     }
 
     @Override

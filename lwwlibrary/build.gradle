@@ -50,5 +50,7 @@ dependencies {
     // Okhttp
     implementation 'com.squareup.okhttp3:okhttp:4.0.1'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.8.1'
+    //recyclerview
+    implementation 'androidx.recyclerview:recyclerview:1.2.0'
 
 }

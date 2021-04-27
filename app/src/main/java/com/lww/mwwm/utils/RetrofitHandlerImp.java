@@ -33,9 +33,9 @@ public class RetrofitHandlerImp extends RetrofitHandler<ApiService> {
         super.initRetrofit();
         Retrofit mRetrofit = new Retrofit.Builder()
                 .baseUrl(ApiService.APP_SERVER_BASE_URL)
-                //JSON转换器,使用Gson来转换
+                //Json转换器，用Gson来转换
                 .addConverterFactory(GsonConverterFactory.create())
-                //RxJava适配器
+                //Rxjava适配器
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(mOkHttpClient)
                 .build();
