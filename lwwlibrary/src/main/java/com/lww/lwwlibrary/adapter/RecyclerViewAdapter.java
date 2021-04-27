@@ -13,6 +13,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+/**
+ * 2021-04-27
+ * lww
+ * https://fraggjkee.medium.com/recyclerview-2020-a-modern-way-of-dealing-with-lists-in-android-using-databinding-d97abf5fb55f
+ * https://medium.com/@fraggjkee/recyclerview-2020-a-modern-way-of-dealing-with-lists-in-android-using-databinding-part-2-df69f0a741f8
+ */
 public class RecyclerViewAdapter extends RecyclerView.Adapter<BindingViewHolder> {
     private ArrayList<RecyclerItem> list = new ArrayList<RecyclerItem>();
 
