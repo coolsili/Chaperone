@@ -5,22 +5,25 @@ import android.util.Log;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * 日期 2020/04/13 10:07
  * lww
  */
-public class RetrofitHandler<T> {
+public class RetrofitHandler {
 
     protected static OkHttpClient mOkHttpClient;
     private static RetrofitHandler mRetrofitHandler;
-    protected T t;
+    private Retrofit mRetrofit;
 
     public RetrofitHandler() {
         initRetrofit();
     }
 
-    public static synchronized <T> RetrofitHandler<T> getInstance() {
+    public static synchronized  RetrofitHandler getInstance() {
         if (mRetrofitHandler == null) {
             synchronized (RetrofitHandler.class) {
                 if (mRetrofitHandler == null) {
@@ -37,17 +40,14 @@ public class RetrofitHandler<T> {
     protected void initRetrofit() {
         Log.e("TAG", "RetrofitHandler.java");
         initOkHttpClient();
-//        mRetrofit = new Retrofit.Builder()
-//                .baseUrl(ApiService.APP_SERVER_BASE_URL)
-//                //Json转换器，用Gson来转换
-//                .addConverterFactory(GsonConverterFactory.create())
-//                //Rxjava适配器
-//                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-//                .client(mOkHttpClient)
-//                .build();
-//        无法获取t的类对象
-//        Class<T> tClass= (Class<T>)((ParameterizedType)t.getClass().getGenericSuperclass()).getActualTypeArguments()[0];
-//        Class<T> tClass;
+        mRetrofit = new Retrofit.Builder()
+                .baseUrl(ApiService.APP_SERVER_BASE_URL)
+                //Json转换器，用Gson来转换
+                .addConverterFactory(GsonConverterFactory.create())
+                //Rxjava适配器
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .client(mOkHttpClient)
+                .build();
 //        t = mRetrofit.create();
     }
 
@@ -95,7 +95,7 @@ public class RetrofitHandler<T> {
      *
      * @return
      */
-    public T getAPIService() {
-        return t;
+    public <T> T getAPIService(Class<T> service) {
+        return mRetrofit.create(service);
     }
 }
