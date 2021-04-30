@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.databinding.BindingAdapter;
 import androidx.databinding.InverseBindingAdapter;
 import androidx.databinding.InverseBindingListener;
@@ -32,6 +33,13 @@ import com.lww.lwwlibrary.retrofit.entity.BaseResponseEntity;
 import com.lww.mwwm.R;
 import com.lww.mwwm.activity.HomeActivity;
 import com.lww.mwwm.entity.RecyclerViewItemEntity;
+import com.scwang.smart.refresh.footer.ClassicsFooter;
+import com.scwang.smart.refresh.header.ClassicsHeader;
+import com.scwang.smart.refresh.layout.SmartRefreshLayout;
+import com.scwang.smart.refresh.layout.api.RefreshLayout;
+import com.scwang.smart.refresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smart.refresh.layout.listener.OnRefreshListener;
+import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener;
 
 import java.util.ArrayList;
 
@@ -109,6 +117,35 @@ public class RecyclerViewListViewModel extends ViewModel{
         data.getValue().addAll(lis);
         data.setValue(data.getValue());
     }
+    @BindingAdapter(value = {"refreshListener","loadMoreListener"},requireAll = false)
+    public static void setRefresh(SmartRefreshLayout refreshLayout,OnRefreshListener refreshListener,OnLoadMoreListener loadMoreListener){
+        refreshLayout.setRefreshHeader(new ClassicsHeader(refreshLayout.getContext()));
+        refreshLayout.setRefreshFooter(new ClassicsFooter(refreshLayout.getContext()));
+        refreshLayout.setOnRefreshListener(refreshListener);
+        refreshLayout.setOnLoadMoreListener(loadMoreListener);
+    }
+    public OnRefreshListener getOnRefreshListener(){
+        return new OnRefreshListener() {
+            @Override
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                Log.e("TAG","RefreshHeader  onRefresh");
+                loadData();
+                refreshLayout.finishRefresh(5000);
+                Log.e("TAG","RefreshHeader  onRefresh2");
+            }
+        };
+    }
+    public OnLoadMoreListener getOnRefreshLoadMoreListener(){
+        return new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+                Log.e("TAG","RefreshFooter  onLoadMore");
+                loadData();
+                refreshLayout.finishLoadMore();
+            }
+        };
+    }
+
 
     @BindingAdapter("items")
     public static void setRecyclerViewItems(RecyclerView recyclerView, ArrayList<RecyclerItem> items){
@@ -125,7 +162,7 @@ public class RecyclerViewListViewModel extends ViewModel{
         }
     }
 
-    @BindingAdapter("refreshing")
+    @BindingAdapter(value = "refreshing")
     public static void setRefreshing(SwipeRefreshLayout swipeRefreshLayout,Boolean isRefreshing){
         if(swipeRefreshLayout.isRefreshing()!=isRefreshing){
             swipeRefreshLayout.setRefreshing(isRefreshing);

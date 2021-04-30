@@ -59,7 +59,9 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.2.0'
     //swiperefreshlayout
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
-
-
+    //refresh  //https://github.com/scwang90/SmartRefreshLayout
+    implementation  'com.scwang.smart:refresh-layout-kernel:2.0.3'      //核心必须依赖
+    implementation  'com.scwang.smart:refresh-header-classics:2.0.3'    //经典刷新头
+    implementation  'com.scwang.smart:refresh-footer-classics:2.0.3'    //经典加载
 
 }

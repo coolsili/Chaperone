@@ -44,11 +44,14 @@
             android:layout_height="wrap_content"
             android:padding="40dp"
             android:text="@{String.valueOf(viewModel.isRefreshing)}"/>
-
-
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
             <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
                 android:layout_width="match_parent"
+                android:layout_weight="1"
                 app:onRefreshListener="@{viewModel.onRefreshList}"
                 app:refreshing="@={viewModel.isRefreshing}">
                 <androidx.recyclerview.widget.RecyclerView
@@ -57,7 +60,36 @@
                     android:layout_height="match_parent"
                     app:items="@{viewModel.data}"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+            <com.scwang.smart.refresh.layout.SmartRefreshLayout
+                android:id="@+id/refreshLayout"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:refreshListener="@{viewModel.getOnRefreshListener()}"
+                app:loadMoreListener="@{viewModel.getOnRefreshLoadMoreListener()}"
+                android:layout_weight="1">
+                <com.scwang.smart.refresh.header.ClassicsHeader
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:items="@{viewModel.data}"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+                <com.scwang.smart.refresh.footer.ClassicsFooter
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+
+        </LinearLayout>
+
+
+
     </LinearLayout>
 
 </layout>

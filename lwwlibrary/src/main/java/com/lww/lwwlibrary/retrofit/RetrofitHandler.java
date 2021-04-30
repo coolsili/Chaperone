@@ -10,6 +10,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
+ * https://github.com/bigeyechou/Rxjava2Retrofit2NetFrame
  * 日期 2020/04/13 10:07
  * lww
  */
