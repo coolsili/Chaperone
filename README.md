@@ -6,6 +6,7 @@ allprojects {
 }
 
 项目依赖使用
+
     dependencies {
         implementation 'com.github.coolsili:Chaperone:1.2.1'
         api 'androidx.lifecycle:lifecycle-extensions:2.2.0'
