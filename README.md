@@ -36,7 +36,10 @@ allprojects {
 
 
 增加请求封装
+
 1.添加依赖。
+
 2.在使用的项目中定义接口 ApiService，
   直接使用 RetrofitHandler.class
+  
 3.调用查看app中HomeViewModle.class示例。
