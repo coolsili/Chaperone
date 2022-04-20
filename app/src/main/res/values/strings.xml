@@ -1,7 +1,0 @@
-<resources>
-    <string name="app_name">Chaperone</string>
-    <string name="patient">病患管理</string>
-    <string name="nusing">护理管理</string>
-    <string name="setting">设置</string>
-    <string name="additem">addItem</string>
-</resources>
