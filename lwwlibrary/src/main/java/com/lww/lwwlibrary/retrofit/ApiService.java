@@ -12,7 +12,6 @@ import retrofit2.http.POST;
  * 自己构建ApiService类
  */
 public interface ApiService {
-    String APP_SERVER_BASE_URL = "https://iomstest.logimis.com/";
 
     //登录
     @POST("appDisUserLoginController.do?toUserLogin")

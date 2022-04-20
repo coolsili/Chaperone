@@ -29,6 +29,7 @@ public class LoginViewModel extends ViewModel{
 
     public void onLogin(View view){
         //判断限制输入字符是否正确，是否有网
+
 //        Toast.makeText(BaseApplication.getInstance(),userName+" "+password, Toast.LENGTH_SHORT).show();
         RetrofitHandler.getInstance().getAPIService(ApiService.class)
                 .login(ObservableManager.getInstance().getRequestBody(ParamsBuilder.getIntance()

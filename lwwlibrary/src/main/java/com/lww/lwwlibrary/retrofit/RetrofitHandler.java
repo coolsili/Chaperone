@@ -19,6 +19,7 @@ public class RetrofitHandler {
     protected static OkHttpClient mOkHttpClient;
     private static RetrofitHandler mRetrofitHandler;
     private Retrofit mRetrofit;
+    private String APP_SERVER_BASE_URL = "https://iomstest.logifasffmis.com/";
 
     public RetrofitHandler() {
         initRetrofit();
@@ -35,6 +36,11 @@ public class RetrofitHandler {
         return mRetrofitHandler;
     }
 
+    public void setBaseUrl(String host){
+        this.APP_SERVER_BASE_URL = host;
+        initRetrofit();
+    }
+
     /**
      * 获取 Retrofit
      */
@@ -42,7 +48,7 @@ public class RetrofitHandler {
         Log.e("TAG", "RetrofitHandler.java");
         initOkHttpClient();
         mRetrofit = new Retrofit.Builder()
-                .baseUrl(ApiService.APP_SERVER_BASE_URL)
+                .baseUrl(APP_SERVER_BASE_URL)
                 //Json转换器，用Gson来转换
                 .addConverterFactory(GsonConverterFactory.create())
                 //Rxjava适配器
