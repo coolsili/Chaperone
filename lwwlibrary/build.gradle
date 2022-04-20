@@ -24,6 +24,19 @@ android {
 //        sourceCompatibility 1.8
 //        targetCompatibility 1.8
 //    }
+afterEvaluate {
+        publishing {
+            publications {
+                release(MavenPublication) {
+                    groupId = 'org.gradle.sample'
+                    artifactId = 'library'
+                    version = '1.1'
+//                    from components.release
+                }
+            }
+        }
+    }
+
 }
 
 dependencies {
