@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="com.lww.mwwm.model.HomeViewModel"/>
+
+        <variable
+            name="viewModel"
+            type="HomeViewModel" />
+    </data>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".activity.HomeActivity">
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/pages"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            tools:ignore="MissingConstraints">
+        </androidx.viewpager.widget.ViewPager>
+        <com.flyco.tablayout.CommonTabLayout
+            app:tl_indicator_color="#2C97DE"
+            app:tl_textSelectColor="#2C97DE"
+            app:tl_textUnselectColor="#66000000"
+            app:tl_underline_color="#DDDDDD"
+            app:tl_iconWidth="25dp"
+            app:tl_iconHeight="25dp"
+            app:tl_textsize="12dp"
+            app:tl_underline_height="1dp"
+            android:id="@+id/tabs"
+            android:paddingTop="5dp"
+            android:background="#ffffff"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"/>
+    </LinearLayout>
+
+</layout>
