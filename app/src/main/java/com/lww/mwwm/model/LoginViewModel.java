@@ -33,9 +33,13 @@ public class LoginViewModel extends ViewModel{
 //        Toast.makeText(BaseApplication.getInstance(),userName+" "+password, Toast.LENGTH_SHORT).show();
         RetrofitHandler.getInstance().getAPIService(ApiService.class)
                 .login(ObservableManager.getInstance().getRequestBody(ParamsBuilder.getIntance()
-                        .addParams("userName",userName.getValue())
-                        .addParams("password",password.getValue())
-                        .addParams("type","0").get()))
+                        .addParams("instrumentId",userName.getValue())
+                        .addParams("monitorItemId",userName.getValue())
+                        .addParams("pageSize",20)
+                        .addParams("currentPage",1)
+                        .addParams("startTime",password.getValue())
+                        .addParams("endTime",password.getValue())
+                        .addParams("status","1").get()))
                 .compose(RxTransformerHelper.<BaseResponseEntity<BaseEntity>>observableIO2Main())
                 .subscribe(new BaseObserver<BaseEntity>() {
                     @Override
