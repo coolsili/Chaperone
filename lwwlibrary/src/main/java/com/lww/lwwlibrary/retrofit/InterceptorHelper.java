@@ -31,7 +31,7 @@ public class InterceptorHelper {
                     Log.w(TAG, "LogInterceptor---------: " + message);
                 }
             }
-        }).setLevel(HttpLoggingInterceptor.Level.BODY);//设置打印数据的级别
+        }).setLevel(isLog?HttpLoggingInterceptor.Level.BODY:HttpLoggingInterceptor.Level.NONE);//设置打印数据的级别
     }
 
     /**
