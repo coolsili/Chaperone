@@ -45,7 +45,7 @@ import java.util.ArrayList;
 
 //@InverseBindingMethods({@InverseBindingMethod(type=androidx.swiperefreshlayout.widget.SwipeRefreshLayout.class,attribute = "refresheds",event = "bind_swipeRefreshLayout_refreshingAttrChanged",method = "isRefreshing")})
 public class RecyclerViewListViewModel extends ViewModel{
-    public MutableLiveData<ArrayList<RecyclerItem>> data = new MutableLiveData<>();
+    public MutableLiveData<ArrayList<RecyclerItem>> data = new MutableLiveData<>(new ArrayList<>());
     public MutableLiveData<Boolean> isRefreshing  = new MutableLiveData<>(false);
     public int requestNum = 0;
 

@@ -70,14 +70,23 @@ public class InterceptorHelper {
         return new Interceptor() {
             @Override
             public Response intercept(Chain chain) throws IOException {
-                int maxRetry = 10;//最大重试次数
-                int retryNum = 5;//假如设置为3次重试的话，则最大可能请求4次（默认1次+3次重试）
-
+                int maxRetry = 2;//最大重试次数
+                int retryNum = 0;//假如设置为3次重试的话，则最大可能请求4次（默认1次+3次重试）
+                int retryInterval = 500;
                 Request request = chain.request();
-                Response response = chain.proceed(request);
+                Response response = chain.proceed(request); // 初始尝试
                 while (!response.isSuccessful() && retryNum < maxRetry) {
                     retryNum++;
-                    response = chain.proceed(request);
+                    Log.d("RetryInterceptor", "重试尝试 #" + retryNum + "/" + maxRetry);
+                    if (response.body() != null) {
+                        response.body().close(); // 关闭之前不成功的响应体很重要
+                    }
+                    try {
+                        Thread.sleep(retryInterval);
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                    }
+                    response = chain.proceed(request); // 重试
                 }
                 return response;
             }

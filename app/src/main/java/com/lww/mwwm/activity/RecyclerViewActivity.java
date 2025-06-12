@@ -25,7 +25,7 @@ public class RecyclerViewActivity extends BaseActivity<ActivityRecyclerViewBindi
     @Override
     protected void afterCreate() {
         mViewDataBind.setViewModel(vm);
-
+        mViewDataBind.refreshLayout.setEnableRefresh(false);
     }
 
     @Override

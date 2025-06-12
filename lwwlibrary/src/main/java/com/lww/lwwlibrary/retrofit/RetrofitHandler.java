@@ -2,7 +2,15 @@ package com.lww.lwwlibrary.retrofit;
 
 import android.util.Log;
 
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.cert.X509Certificate;
 import java.util.concurrent.TimeUnit;
+
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
@@ -16,7 +24,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class RetrofitHandler {
 
-    protected static OkHttpClient mOkHttpClient;
+    protected OkHttpClient mOkHttpClient;
     private static RetrofitHandler mRetrofitHandler;
     private Retrofit mRetrofit;
     private String APP_SERVER_BASE_URL = "https://iomstest.logifasffmis.com/";
@@ -61,13 +69,33 @@ public class RetrofitHandler {
     /**
      * 单例模式获取 OkHttpClient
      */
-    private static void initOkHttpClient() {
+    private void initOkHttpClient(){
         if (mOkHttpClient == null) {
             synchronized (RetrofitHandler.class) {
                 if (mOkHttpClient == null) {
                     // 指定缓存路径,缓存大小100Mb
 //                    Cache cache = new Cache(new File(HttpConfig.DIR_CACHE_FILE, "HttpCache"),
 //                            1024 * 1024 * 100);
+                    TrustManager[] trustAllCerts = new TrustManager[] {
+                            new X509TrustManager() {
+                                public X509Certificate[] getAcceptedIssuers() { return new X509Certificate[0]; }
+                                public void checkClientTrusted(X509Certificate[] certs, String authType) {}
+                                public void checkServerTrusted(X509Certificate[] certs, String authType) {}
+                            }
+                    };
+
+
+                    SSLContext sc = null;
+                    try {
+                        sc = SSLContext.getInstance("TLS");
+                    } catch (NoSuchAlgorithmException e) {
+                        throw new RuntimeException(e);
+                    }
+                    try {
+                        sc.init(null, trustAllCerts, new SecureRandom());
+                    } catch (KeyManagementException e) {
+                        throw new RuntimeException(e);
+                    }
                     mOkHttpClient = new OkHttpClient.Builder()
                             //设置连接超时时间
                             .connectTimeout(HttpConfig.HTTP_TIME_OUT_TIME, TimeUnit.SECONDS)
@@ -87,14 +115,18 @@ public class RetrofitHandler {
                             .addInterceptor(InterceptorHelper.getRetryInterceptor())
                             // 信任Https,忽略Https证书验证
                             // https认证,如果要使用https且为自定义证书 可以去掉这两行注释，并自行配制证书。
-//                            .sslSocketFactory(SSLSocketTrust.getSSLSocketFactory())
-//                            .hostnameVerifier(SSLSocketTrust.getHostnameVerifier())
+                            .sslSocketFactory(sc.getSocketFactory(),(X509TrustManager)trustAllCerts[0])
+                            .hostnameVerifier(((hostname, session) -> true))
                             //缓存
 //                            .cache(cache)
                             .build();
                 }
             }
         }
+    }
+
+    public OkHttpClient getmOkHttpClient(){
+        return mOkHttpClient;
     }
 
     /**
