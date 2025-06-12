@@ -98,11 +98,11 @@ public class RetrofitHandler {
                     }
                     mOkHttpClient = new OkHttpClient.Builder()
                             //设置连接超时时间
-                            .connectTimeout(HttpConfig.HTTP_TIME_OUT_TIME, TimeUnit.SECONDS)
+                            .connectTimeout(HttpConfig.HTTP_TIME_OUT_TIME, TimeUnit.MILLISECONDS)
                             //设置读取超时时间
-                            .readTimeout(HttpConfig.HTTP_TIME_OUT_TIME, TimeUnit.SECONDS)
+                            .readTimeout(HttpConfig.HTTP_TIME_OUT_TIME, TimeUnit.MILLISECONDS)
                             //设置写入超时时间
-                            .writeTimeout(HttpConfig.HTTP_TIME_OUT_TIME, TimeUnit.SECONDS)
+                            .writeTimeout(HttpConfig.HTTP_TIME_OUT_TIME, TimeUnit.MILLISECONDS)
                             //默认重试一次
                             .retryOnConnectionFailure(true)
                             //添加请求头拦截器
