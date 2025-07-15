@@ -106,7 +106,18 @@ public class InterceptorHelper {
                 //或者添加header等等
 
                 Request originalRequest = chain.request();
-
+                RequestBody body = originalRequest.body();
+                // 如果请求体为空，或者已经有编码了，直接跳过
+                    if (body == null || originalRequest.header("Content-Encoding") != null) {
+                        return chain.proceed(originalRequest);
+                    }
+                    
+                    // !! 关键的判断 !!
+                    // 如果请求的 Content-Type 是 multipart，则不进行 Gzip 压缩
+                    MediaType contentType = body.contentType();
+                    if (contentType != null && "multipart".equals(contentType.type())) {
+                        return chain.proceed(originalRequest);
+                    }
                 if (null == originalRequest.body()) {
                     return chain.proceed(originalRequest);
                 }
